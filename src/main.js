@@ -5,6 +5,10 @@ import router from './router'
 import store from './store'
 Vue.config.productionTip = false
 
+import VueIntro from 'vue-introjs';
+Vue.use(VueIntro);
+import 'intro.js/introjs.css';
+
 new Vue({
   router,
   store,

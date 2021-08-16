@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     5555
-    <MyBtn>你的名字</MyBtn>
+    <MyBtn round>你的名字</MyBtn>
 
   </div>
 </template>

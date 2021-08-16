@@ -4,7 +4,9 @@
 
 <script>
     export default {
-        name: "MyBtn"
+        name: "MyBtn",
+        // inheritAttrs:false,
+        props:['round']
     }
 </script>
 
