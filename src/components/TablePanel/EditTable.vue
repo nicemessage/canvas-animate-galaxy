@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%" class="auto-table" @drop="dropHandler" @dragover="allowDrop">
+  <div style="width: 100%" class="auto-table" :class="{outline:outline}" @dragenter="enter" @drop="dropHandler" @dragover="allowDrop">
     <el-form :model="tableForm" ref="tableForm">
       <table class="table table-bordered" id="hl-tree-table">
         <thead>
@@ -263,6 +263,7 @@ export default {
       },
       addValue: '',
       addObject: {},
+      outline:false
     };
   },
   created() {
@@ -293,6 +294,9 @@ export default {
   },
   mounted() {},
   methods: {
+    enter(e){
+      e.dataTransfer.dropEffect='move'
+    },
     // 打开提示并定位
     openTip(e, item, preKey, key, index) {
       const { target } = e;
@@ -358,6 +362,7 @@ export default {
       obj.filedAccuracy = '';
     },
     dropHandler(e) {
+      this.outline=false
       if (this.publishDisable) {
         return;
       }
@@ -369,6 +374,7 @@ export default {
       }
     },
     allowDrop(e) {
+      this.outline=true
       e.preventDefault();
     },
     // 发布过的字段定死逻辑 未发布的字段不能拖动到发布字段前面
@@ -498,7 +504,6 @@ label {
   content: '\F116';
 }
 .ivu-icon {
-  cursor: pointer;
   margin-right: 2px;
 }
 .ref-container {
@@ -506,7 +511,7 @@ label {
   max-width: 200px;
   word-wrap: break-word;
   word-break: normal;
-  cursor: pointer;
+
 }
 
 .action-container {
@@ -514,7 +519,6 @@ label {
   width: 100%;
   max-width: 100%;
   color: #2d8cf0;
-  cursor: pointer;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -536,10 +540,10 @@ label {
   outline: 2px dashed #589ef8;
 }
 .draggable-icon {
-  cursor: move;
+
 }
 .draggable-icon-no {
-  cursor: not-allowed;
+
 }
 .el-form-item {
   padding: 0;
@@ -551,4 +555,7 @@ label {
   left: 8px;
   background: white;
 }
+  .outline{
+    border: 2px dashed red;
+  }
 </style>

@@ -1,107 +1,72 @@
 <template>
   <div id="app">
-    <div>
-      <div id="container" >
-        <ul><li
-                class="ef-node-menu-ul border-b"
-                draggable="true"
-                @dragstart="dragStartHandler($event, {fieldCnName:'英雄',fieldEnName:'hero'})"
-        >
-          <div class="oneMenuChild">
-            <p>英雄</p>
-            <p>hero</p>
-          </div>
-        </li></ul>
-        <TablePanel type="DIMENSION" title="常规字段" :list="generalAttrs"></TablePanel>
-      </div>
-    </div>
+    {{val1}}
+    <br>
+    {{val2}}
+    <br>
+    <router-link to="/blue/water">水</router-link>
+    <span @click="$router.replace({path:'/blue/water'})">水2</span>
 
+    <router-link to="/blue">blue</router-link>
+    <router-link to="/about">about</router-link>
+    <router-view></router-view>
+
+    <el-menu  class="el-menu-demo"  :hasCollapseBtn="true"  :default-openeds="['2']" @select="handleSelect"  :router="true">
+      <el-menu-item index="/center">处理中心</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="/plat/moon">月亮</el-menu-item>
+        <el-menu-item index="/plat/sun">太阳</el-menu-item>
+        <el-submenu index="/plat/sky">
+          <template slot="title">天空</template>
+          <el-menu-item index="/plat/sky/bird">鸟</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+      <el-menu-item index="/info">消息中心</el-menu-item>
+    </el-menu>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import MyBtn from "@/views/MyBtn";
-import axios from 'axios'
-import * as monaco from 'monaco-editor';
 import TablePanel from "./components/TablePanel/TablePanel";
+import axios from 'axios'
+import Cookies from 'js-cookie'
+
+Cookies.set('foo', 'ni de shi jie~~')
 
 export default {
   name: 'app',
   data() {
     return {
-      generalAttrs: []
+      generalAttrs: [],
+      val:'',
+      val1:top.location.href,
+      val2:location.href
     }
   },
   created() {
-    axios.get('http://localhost:9000/happy').then(function (res) {
-      console.log(res.data);
-    })
-  },
-  mounted() {
-    this.startIntro();
+    // fetch('http://localhost:3000').then(function(data) {
+    //   return data.text();  // 通过调用text返回promise对象
+    // }).then((data) =>{
+    //   this.sth=data// 得到真正的结果
+    // })
+    axios.get('http://localhost:3000/api/getname').then(val1=>console.log(val1.data,'yyyyyyy'))
+    console.log(top.location.href,'1');
+    console.log(location.href,'2');
   },
   methods: {
-    startIntro() {
-      var intro = introJs();
-      intro.setOptions({
-        nextLabel: "下一步",
-        skipLabel: "跳 过",
-        doneLabel: "结束引导",
-        steps: [
-          {
-            element: "#v-step3",
-            intro:
-                    "单击“上传”按钮，可上传单张有描述的图片素材，同时也支持“批量上传”多张图片素材。",
-            position: "right"
-          },
-          {
-            element: "#v-step2",
-            intro:
-                    "“鼠标拖动”素材到场景中，可调整素材在场景中的位置、大小、角度。",
-            position: "right"
-          },
-          {
-            element: "#v-step1",
-            intro:
-                    "还可以通过选择色调模板，改变整个场景（不包括图片素材）的色调。",
-            position: "right"
-          },
-          {
-            element: "#v-step4",
-            intro:
-                    "这里还有常用的素材操作指南：素材的选择、大小、位置、角度、删除。",
-            position: "right"
-          },
-          {
-            element: "#v-step6",
-            intro:
-                    "单击“设置音乐”按钮，打开音乐设置窗口，选择或上传MP3背景音乐，为场景添加背景音乐",
-            position: "bottom"
-          },
-          {
-            element: "#v-step7",
-            intro:
-                    "设置好场景的素材后，单击“保存”按钮，就可以分享展厅到朋友圈/好友。",
-            position: "bottom"
-          }
-        ]
-      });
-
-      var $this = this;
-      intro.start().onexit(function() {
-        // 点击结束引导 变状态
-        if($this.isIframe){
-          window.parent.postMessage({type: 'isGuide', data: false}, '*')
-        }
-
-      });
+    // 事实表、应用表结构设计左边字段拖拽事件
+    dragStartHandler(e, item) {
+      e.dataTransfer.setData('application/json', JSON.stringify(item));
+    },
+    drag(){
+      console.log(999);
+    },
+    handleSelect(index,indexPath){
+      console.log(index,indexPath);
     }
   },
-
   components: {
-    HelloWorld,
-    MyBtn,
     TablePanel
   }
 }
@@ -115,8 +80,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-#container{
-  height: 900px;
 }
 </style>

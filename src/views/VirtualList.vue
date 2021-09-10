@@ -13,6 +13,8 @@
 -->
 <template>
     <div ref="list" class="infinite-list-container" @scroll="scrollEvent()">
+        <router-link to="/blue">blue</router-link>
+        <router-link to="/about">about</router-link>
         <div
                 class="infinite-list-phantom"
                 :style="{ height: listHeight + 'px' }"

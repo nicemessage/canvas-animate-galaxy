@@ -1,8 +1,6 @@
 <template>
   <div >
-    我是blue色~~~
-
-    <router-view></router-view>
+   太阳
   </div>
 </template>
 

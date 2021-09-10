@@ -1,8 +1,7 @@
 <template>
   <div >
-    我是blue色~~~
-
-    <router-view></router-view>
+   工作台
+      <router-view></router-view>
   </div>
 </template>
 

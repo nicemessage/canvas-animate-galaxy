@@ -1,8 +1,7 @@
 <template>
-  <div >
-    我是blue色~~~
+  <div @click="$router.push('/blue')">
+    流啊流啊流~~~
 
-    <router-view></router-view>
   </div>
 </template>
 
