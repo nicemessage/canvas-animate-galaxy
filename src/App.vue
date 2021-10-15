@@ -1,58 +1,188 @@
 <template>
-  <div id="app">
-    {{val1}}
-    <br>
-    {{val2}}
-    <br>
-    <router-link to="/blue/water">水</router-link>
-    <span @click="$router.replace({path:'/blue/water'})">水2</span>
 
-    <router-link to="/blue">blue</router-link>
-    <router-link to="/about">about</router-link>
-    <router-view></router-view>
+        <div id="app">
+          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+            <el-radio-button :label="false">展开</el-radio-button>
+            <el-radio-button :label="true">收起</el-radio-button>
+          </el-radio-group>
+            <el-menu
+                    class="el-menu-vertical-demo"
+                    router
+                    :collapse="isCollapse"
 
-    <el-menu  class="el-menu-demo"  :hasCollapseBtn="true"  :default-openeds="['2']" @select="handleSelect"  :router="true">
-      <el-menu-item index="/center">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="/plat/moon">月亮</el-menu-item>
-        <el-menu-item index="/plat/sun">太阳</el-menu-item>
-        <el-submenu index="/plat/sky">
-          <template slot="title">天空</template>
-          <el-menu-item index="/plat/sky/bird">鸟</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="/info">消息中心</el-menu-item>
-    </el-menu>
-  </div>
+            >
+              <MenuList :items="menuData"></MenuList>
+
+            </el-menu>
+
+        </div>
+
+
+
+
+
+
 </template>
 
 <script>
 import TablePanel from "./components/TablePanel/TablePanel";
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import MenuList from "./components/MenuList";
 
-Cookies.set('foo', 'ni de shi jie~~')
 
 export default {
   name: 'app',
   data() {
     return {
-      generalAttrs: [],
-      val:'',
-      val1:top.location.href,
-      val2:location.href
+      menuData: [
+        {
+          "funcName": "项目管理",
+          "funcType": "1",
+          "funcCode": null,
+          "parentFuncCode": null,
+          "funcPath": null,
+          "funcLv": null,
+          "isShow": null,
+          "funcUrl": "/project",
+          "funcLogo": "#iconicon-test53",
+          "childElementList": null,
+          "openType": null
+        },
+        {
+          "funcName": "数据源管理",
+          "funcType": "1",
+          "funcCode": null,
+          "parentFuncCode": null,
+          "funcPath": null,
+          "funcLv": null,
+          "isShow": null,
+          "funcUrl": "",
+          "funcLogo": "#iconicon-test56",
+          "childElementList": [
+            {
+              "funcName": "MQ管理",
+              "funcType": "1",
+              "funcCode": null,
+              "parentFuncCode": null,
+              "funcPath": null,
+              "funcLv": null,
+              "isShow": null,
+              "funcUrl": "/source/data/list",
+              "funcLogo": "",
+              "childElementList": null,
+              "openType": null
+            },
+            {
+              "funcName": "虚拟表管理",
+              "funcType": "1",
+              "funcCode": null,
+              "parentFuncCode": null,
+              "funcPath": null,
+              "funcLv": null,
+              "isShow": null,
+              "funcUrl": "/source/table/list",
+              "funcLogo": "",
+              "childElementList": null,
+              "openType": null
+            }
+          ],
+          "openType": null
+        },
+        {
+          "funcName": "系统管理",
+          "funcType": "1",
+          "funcCode": null,
+          "parentFuncCode": null,
+          "funcPath": null,
+          "funcLv": null,
+          "isShow": null,
+          "funcUrl": "",
+          "funcLogo": "#iconicon-test65",
+          "childElementList": [
+            {
+              "funcName": "平台参数",
+              "funcType": "1",
+              "funcCode": null,
+              "parentFuncCode": null,
+              "funcPath": null,
+              "funcLv": null,
+              "isShow": null,
+              "funcUrl": "/system/platform",
+              "funcLogo": "",
+              "childElementList": null,
+              "openType": null
+            },
+            {
+              "funcName": "操作日志",
+              "funcType": "1",
+              "funcCode": null,
+              "parentFuncCode": null,
+              "funcPath": null,
+              "funcLv": null,
+              "isShow": null,
+              "funcUrl": "/operate",
+              "funcLogo": "",
+              "childElementList": null,
+              "openType": null
+            },
+            {
+              "funcName": "SQL编辑器",
+              "funcType": "1",
+              "funcCode": null,
+              "parentFuncCode": null,
+              "funcPath": null,
+              "funcLv": null,
+              "isShow": null,
+              "funcUrl": "",
+              "funcLogo": "#iconicon-test65",
+              "childElementList": [
+                {
+                  "funcName": "函数管理",
+                  "funcType": "1",
+                  "funcCode": null,
+                  "parentFuncCode": null,
+                  "funcPath": null,
+                  "funcLv": null,
+                  "isShow": null,
+                  "funcUrl": "/sql/function",
+                  "funcLogo": "",
+                  "childElementList": null,
+                  "openType": null
+                },
+                {
+                  "funcName": "关键字管理",
+                  "funcType": "1",
+                  "funcCode": null,
+                  "parentFuncCode": null,
+                  "funcPath": null,
+                  "funcLv": null,
+                  "isShow": null,
+                  "funcUrl": "/sql/keyword",
+                  "funcLogo": "",
+                  "childElementList": null,
+                  "openType": null
+                }
+              ],
+              "openType": null
+            },
+            {
+              "funcName": "用户管理",
+              "funcType": "1",
+              "funcCode": null,
+              "parentFuncCode": null,
+              "funcPath": null,
+              "funcLv": null,
+              "isShow": null,
+              "funcUrl": "/user",
+              "funcLogo": "",
+              "childElementList": null,
+              "openType": null
+            }
+          ]
+        }],
+      isCollapse:true
     }
-  },
-  created() {
-    // fetch('http://localhost:3000').then(function(data) {
-    //   return data.text();  // 通过调用text返回promise对象
-    // }).then((data) =>{
-    //   this.sth=data// 得到真正的结果
-    // })
-    axios.get('http://localhost:3000/api/getname').then(val1=>console.log(val1.data,'yyyyyyy'))
-    console.log(top.location.href,'1');
-    console.log(location.href,'2');
   },
   methods: {
     // 事实表、应用表结构设计左边字段拖拽事件
@@ -63,22 +193,21 @@ export default {
       console.log(999);
     },
     handleSelect(index,indexPath){
-      console.log(index,indexPath);
+      console.log(index,indexPath,'xxxx');
     }
   },
   components: {
-    TablePanel
+    TablePanel,
+    MenuList
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
+
 </style>

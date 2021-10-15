@@ -14,6 +14,8 @@ module.exports = {
             introJs: ['intro.js', 'introJs']
         })
     ]
-  }
-
+  },
+    devServer: {
+        // proxy: 'http://localhost:3000'
+    }
 };

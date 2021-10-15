@@ -1,0 +1,5 @@
+dong:3: shen
+guan:2: zhen
+wo:9: wo
+lai:10: lai
+le:1: le

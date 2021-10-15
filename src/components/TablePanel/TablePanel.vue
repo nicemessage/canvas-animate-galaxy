@@ -52,6 +52,7 @@ export default {
   },
   async created() {
     this.columns = await columns(this.type);
+    console.log(this.$parent,'parent777');
   },
   mounted() {},
   data() {

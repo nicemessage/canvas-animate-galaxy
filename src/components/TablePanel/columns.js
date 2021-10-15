@@ -29,7 +29,7 @@ const tableEnNameValidator = (r, v, cb) => {
     cb(new Error(r.message));
   }
 };
-async function columns(type) {
+export async function columns(type) {
 
   // 注意事实表、维度表、应用表字段单词为错误单词 filed开头
   // 事实表 数据列
@@ -331,4 +331,6 @@ async function columns(type) {
   return columnArr;
 }
 
-export default columns;
+export const mmm=444
+const me=999
+export default me
