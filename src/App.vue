@@ -1,8 +1,9 @@
 <template>
-
         <div id="app">
             <div class="container">
+<!--流动的银河-->
                 <canvas-overlay></canvas-overlay>
+
                 <div class="content">
                     <div class="header">
                         <div class="header-logo">
@@ -81,51 +82,11 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="tab-contents">
-                            <div class="tab-content"
-                                v-for="(item,index) in mouduleInfo"
-                                :key="index"
-                                v-show="index === activeTabIndex"
-                                :class="[
-                                    'tab-content-'+item.children.length,
-                                    index === activeTabIndex?'show-tab-content':'',
-                                    index === lastActiveTabIndex ? 'hide-tab-content':'']"
-                            >
-                                <template
-                                    v-for="(child,childIndex) in item.children"
-                                >
-                                    <Card1
-                                        :key="childIndex"
-                                        v-if="child.card==='card1'"
-                                        :animateDaley="child.delay"
-                                        :title="child.title"
-                                        :description="child.description"></Card1>
-                                    <Card2
-                                        :key="childIndex"
-                                        v-if="child.card==='card2'"
-                                        :animateDaley="child.delay"
-                                        :title="child.title"
-                                        :description="child.description">
-                                    </Card2>
-                                    <Card3
-                                        :key="childIndex"
-                                        v-if="child.card==='card3'"
-                                        :animateDaley="child.delay"
-                                        :title="child.title"
-                                        :description="child.description">
-                                    </Card3>
-                                    <Card4
-                                        :key="childIndex"
-                                        v-if="child.card==='card4'"
-                                        :animateDaley="child.delay"
-                                        :title="child.title"
-                                        :description="child.description">
-                                    </Card4>
-                                </template>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
+
+
+<!--最下边的卡片-->
                 <div class="tab-contents">
                     <div class="tab-content"
                          v-for="(item,index) in mouduleInfo"
@@ -169,18 +130,9 @@
                         </template>
                     </div>
                 </div>
-                <div class="footer">
-                    <span>Copyright @ 2019 JD Digits,All Rights Reserverd</span>
-                </div>
+
             </div>
-
         </div>
-
-
-
-
-
-
 </template>
 
 <script>
@@ -226,6 +178,14 @@ export default {
             activeTabIndex: 0,
             lastActiveTabIndex: null,
         };
+    },
+    created() {
+       window.onmessage=function (e) {
+                console.log(e.data,'dfdf')
+       }
+    },
+    mounted() {
+        window.parent.postMessage({type:'height',value:document.documentElement.scrollHeight},'*')
     },
     components: {
         Card1,

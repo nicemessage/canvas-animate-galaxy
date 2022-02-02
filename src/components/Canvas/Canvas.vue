@@ -1,14 +1,6 @@
 <template>
   <div class="canvas-overlay">
     <canvas id="cas" height="800" width="100%"></canvas>
-    <!-- <div class="meteor-container">
-      <img v-for="item in starData"
-        :src="meteors[item.index]"
-        :key="item.key"
-        :style="{ left: item.left, top: item.top, animationDelay: item.delay }"
-        alt=""
-      />
-    </div> -->
   </div>
 </template>
 <script>
@@ -38,8 +30,6 @@ export default {
     this.canvasAnimate.draw();
 
     this.date = Date.now();
-    // 处理流星
-    // this.startMeteors();
   },
   destroyed() {
     this.canvasAnimate.destroy();
@@ -61,18 +51,7 @@ export default {
         });
       }
       this.starData = datas;
-    },
-    startMeteors() {
-      this.timeId = requestAnimationFrame(() => {
-        const d = Date.now();
-        const interval = 4000 + Math.floor(Math.random() * 5) * 1000;
-        if ((d - this.date) / interval > 1) {
-          this.date = d;
-          this.randomStartData();
-        }
-        this.startMeteors();
-      });
-    },
+    }
   },
 };
 </script>
