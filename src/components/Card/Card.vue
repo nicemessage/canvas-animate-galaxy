@@ -84,12 +84,12 @@ export default {
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translate3d(150px, 0, 0);
+    transform: translateX(150px);
   }
 
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 }
 </style>

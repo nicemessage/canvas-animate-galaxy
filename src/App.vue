@@ -1,24 +1,13 @@
 <template>
         <div id="app">
             <div class="container">
-<!--流动的银河-->
+<!--流动的银河动画-->
                 <canvas-overlay></canvas-overlay>
 
                 <div class="content">
-                    <div class="header">
-                        <div class="header-logo">
-                            <a href="/">
-                                <img :src="logoImg" alt="">
-                            </a>
-                        </div>
-                        <div class="console">
-                            <a href="/board">
-                                <span>控制台</span>
-                            </a>
-                        </div>
-                    </div>
                     <div class="title">
                         <div class="title-image">
+                            <!--  主标题星球升降动画 -->
                             <img :src="titleImg" class="img" alt="">
                             <img :src="titleMaskImg1" class="mask1" alt="">
                             <img :src="titleMaskImg2" class="mask2" alt="">
@@ -28,33 +17,35 @@
                         <div class="item feature1">
                             <div class="img">
                                 <img :src="feature1Img" class="feature-img" alt="">
-                                <img :src="mask1Img" class="mask animated" alt="">
+                            <!--hover抖动特效-->
+                                <img :src="mask1Img" class="mask" alt="">
                             </div>
                             <div class="txt">高效安全</div>
                         </div>
                         <div class="item feature2">
                             <div class="img">
                                 <img :src="feature2Img" class="feature-img" alt="">
-                                <img :src="mask2Img" class="mask animated" alt="">
+                                <img :src="mask2Img" class="mask" alt="">
                             </div>
                             <div class="txt">高性能</div>
                         </div>
                         <div class="item feature3">
                             <div class="img">
                                 <img :src="feature3Img" class="feature-img" alt="">
-                                <img :src="mask3Img" class="mask animated" alt="">
+                                <img :src="mask3Img" class="mask" alt="">
                             </div>
                             <div class="txt">全流程</div>
                         </div>
                         <div class="item feature4">
                             <div class="img">
                                 <img :src="feature4Img" class="feature-img" alt="">
-                                <img :src="mask4Img" class="mask animated" alt="">
+                                <img :src="mask4Img" class="mask" alt="">
                             </div>
                             <div class="txt">数据驱动</div>
                         </div>
                     </div>
                     <div class="enter">
+                       <!-- hover粒子扩散动画组件-->
                         <Particle ref="particle">
                             <div
                                     class="button-effect"
@@ -64,9 +55,6 @@
                                 开启大数据之旅
                             </div>
                         </Particle>
-                        <!-- <div class="button-effect" @click="goToBoard">
-                            <span>开启银河之旅</span>
-                        </div> -->
                     </div>
                     <div class="sys-info">
                         <div class="tabs">
@@ -84,8 +72,6 @@
                         </div>
                     </div>
                 </div>
-
-
 <!--最下边的卡片-->
                 <div class="tab-contents">
                     <div class="tab-content"
@@ -130,7 +116,6 @@
                         </template>
                     </div>
                 </div>
-
             </div>
         </div>
 </template>
@@ -272,7 +257,7 @@ export default {
                         top: 50%;
                         left: 50%;
                         transform: translate(-410px, -38px);
-                        animation: up-down 3s ease 1s infinite;
+                        animation: up-down 3s 1s infinite;
                     }
                 }
             }
@@ -333,7 +318,6 @@ export default {
                     background-size:140px 43px;
                     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.22);
                     line-height: 40px;
-                    // margin:30px auto;
                     animation: pulse 1s infinite alternate;
                     span{
                         font-size: 14px;
@@ -400,11 +384,9 @@ export default {
     }
     @keyframes pulse {
         0% {
-            // margin-top: 0px;
             transform: translateY(0);
         }
         100% {
-            // margin-top: 6px;
             transform: translateY(4px);
         }
     }
@@ -415,84 +397,43 @@ export default {
         100% {top:50%;}
     }
 
-    .animated {
-        animation-duration: 1s;
-        animation-fill-mode: both;
-    }
     .desc .item:hover .mask {
-        animation-name: jello;
-        transform-origin: center;
+        animation: shake 1s;
+
     }
-    @keyframes jello {
+    @keyframes shake {
         from,
         11.1%,
         to {
-            -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
         }
 
         22.2% {
-            -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
             transform: skewX(-12.5deg) skewY(-12.5deg);
         }
 
         33.3% {
-            -webkit-transform: skewX(6.25deg) skewY(6.25deg);
             transform: skewX(6.25deg) skewY(6.25deg);
         }
 
         44.4% {
-            -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
             transform: skewX(-3.125deg) skewY(-3.125deg);
         }
 
         55.5% {
-            -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
             transform: skewX(1.5625deg) skewY(1.5625deg);
         }
 
         66.6% {
-            -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
             transform: skewX(-0.78125deg) skewY(-0.78125deg);
         }
 
         77.7% {
-            -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
             transform: skewX(0.390625deg) skewY(0.390625deg);
         }
 
         88.8% {
-            -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
             transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
-        }
-    }
-    // @keyframes fade-in {
-    //    from{transform:rotateY(0deg);}
-    //    to{transform: rotateY(60deg);}
-    // }
-
-    // @keyframes fade-in2 {
-    //    from{transform:rotateY(-90deg);}
-    //    to{transform: rotateY(0deg);}
-    // }
-
-    // .card:hover{
-    //   .title{
-    //     animation: zoomIn 0.5s;
-    //   }
-    //   .description{
-    //     animation: zoomIn 0.5s;
-    //   }
-    // }
-    @keyframes zoomIn {
-        from {
-            opacity: 0;
-            -webkit-transform: scale3d(0.3, 0.3, 0.3);
-            transform: scale3d(0.3, 0.3, 0.3);
-        }
-
-        50% {
-            opacity: 1;
         }
     }
 </style>
